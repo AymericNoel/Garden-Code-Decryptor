@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Déchiffrement de code d'accès</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+
+  <body>
+    <h1 class="title">Module de Déchiffrement de code d'accès de jardins</h1>
+    <div class="container">
+      <form onsubmit="return sendData();" id="form1">
+        <div class="row">
+          <div class="col-25">
+            <label for="password">Code d'accès du jardin :</label>
+          </div>
+          <div class="col-75">
+            <input
+              type="text"
+              id="password"
+              name="password"
+              required
+              placeholder="Code chiffré du jardin"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-25"><label for="key">Clé privée :</label></div>
+          <div class="col-75">
+            <input
+              type="text"
+              id="key"
+              name="key"
+              required
+              placeholder="Votre clé privée Ethereum de la forme '0x...' "
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-25"><label for="key">Hash :</label></div>
+          <div class="col-75">
+            <input
+              type="text"
+              id="hash"
+              required
+              name="hash"
+              placeholder="Hash du code d'accès du jardin depuis la page locataire du site web"
+            />
+          </div>
+        </div>
+      </form>
+      <div>
+        <button type="submit" form="form1" class="submitButton">
+          Obtenir le code d'accès au jardin
+        </button>
+      </div>
+    </div>
+    <div id="codeDisplay" class="codeDisplay">
+      <div>
+        <span>Code d'accès : </span>
+        <b><span id="retrievedCode">-</span></b>
+      </div>
+      <div>
+        <b><p id="isValidCode">-</p></b>
+      </div>
+    </div>
+  </body>
+  <footer>
+    <div class="font-footer">
+      <p>
+        N'hésitez pas à vous mettre en mode hors ligne durant le déchiffrage du
+        code avec votre private key pour maximiser la sécurité.
+      </p>
+      <p>
+        Le code de ce logiciel est complètement open source, n'hésitez pas à le
+        lire :<a class="no-decorate" href="#" onclick="openLink()">
+          Code Github</a
+        >
+      </p>
+    </div>
+  </footer>
+  <script>
+    const electron = require("electron");
+    const ipcRenderer = electron.ipcRenderer;
+    const shell = electron.shell;
+
+    function sendData() {
+      const allData = {
+        password: document.getElementById("password").value,
+        key: document.getElementById("key").value,
+        hash: document.getElementById("hash").value,
+      };
+
+      // send data to nodeJS via electron module index.js
+      ipcRenderer.send("getData", allData);
+      document.getElementById("form1").reset();
+      return false;
+    }
+
+    function openLink() {
+      shell.openExternal("https://github.com/AymericNoel");
+    }
+
+    // listen for event from index.js
+    ipcRenderer.on("getCode", (event, data) => {
+      document.getElementById("retrievedCode").innerHTML = data.code;
+      document.getElementById("isValidCode").innerHTML = data.isValid;
+      document.getElementById("codeDisplay").style.visibility = "visible";
+    });
+
+    ipcRenderer.on("privKeyError", ()=>{
+      alert("Private Key ou code d'accès chiffré invalide. Veuillez vérifier les informations saisies.");
+    })
+  </script>
+</html>
