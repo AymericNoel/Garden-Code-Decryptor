@@ -23,13 +23,13 @@ const createWindow = () => {
     },
   });
 
-  // remove menu items
+  // Remove menu items
   mainWindow.removeMenu();
 
-  // and load the index.html of the app.
+  // And load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, "index.html"));
 
-  // Even listener from index.html
+  // Event listener from index.html
   ipcMain.on("getData", async (event, data) => {
     const code = await decryptMessage(data.key, data.password);
     if (code !== null) {
@@ -109,6 +109,3 @@ app.on("activate", () => {
     createWindow();
   }
 });
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and import them here.
