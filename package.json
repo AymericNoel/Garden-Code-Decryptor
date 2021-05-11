@@ -34,8 +34,16 @@
       "executableName": "${productName} Linux",
       "icon": "src/favicon.ico"
     },
+    "AppImage": {
+      "artifactName": "${productName} Linux ${version}.${ext}",
+      "license": "LICENSE"
+    },
+    "tar.gz": {
+      "artifactName": "${productName} Linux ${version}.${ext}",
+      "license": "LICENSE"
+    },
     "dmg": {
-      "title": "${productName} Mac ${version}"
+      "artifactName": "${productName} Mac ${version}.${ext}"
     },
     "nsis": {
       "installerIcon": "src/favicon.ico",
