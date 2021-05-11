@@ -28,15 +28,9 @@
     },
     "linux": {
       "target": [
-        "tar.gz",
-        "AppImage"
+        "tar.gz"
       ],
-      "executableName": "${productName} Linux",
       "icon": "src/favicon.ico"
-    },
-    "appImage": {
-      "artifactName": "${productName} Linux ${version}.${ext}",
-      "license": "LICENSE"
     },
     "dmg": {
       "artifactName": "${productName} Mac ${version}.${ext}"
