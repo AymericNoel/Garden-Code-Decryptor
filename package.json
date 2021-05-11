@@ -34,7 +34,7 @@
       "executableName": "${productName} Linux",
       "icon": "src/favicon.ico"
     },
-    "AppImage": {
+    "appImage": {
       "artifactName": "${productName} Linux ${version}.${ext}",
       "license": "LICENSE"
     },
