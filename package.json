@@ -28,9 +28,14 @@
     },
     "linux": {
       "target": [
-        "tar.gz"
+        "tar.gz",
+        "AppImage"
       ],
+      "executableName": "${productName} Linux",
       "icon": "src/favicon.ico"
+    },
+    "dmg": {
+      "title": "${productName} Mac ${version}"
     },
     "nsis": {
       "installerIcon": "src/favicon.ico",
@@ -38,12 +43,13 @@
       "uninstallDisplayName": "Garden Password Decryptor",
       "license": "LICENSE",
       "oneClick": false,
-      "allowToChangeInstallationDirectory": true
+      "allowToChangeInstallationDirectory": true,
+      "artifactName": "${productName} Setup Windows ${version}.${ext}"
     }
   },
   "keywords": [],
   "author": {
-    "name": "Aymeric.Noel",
+    "name": "Aymeric Noel",
     "email": "aym.noel@gmail.com"
   },
   "license": "MIT",
